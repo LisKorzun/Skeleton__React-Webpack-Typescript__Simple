@@ -1,13 +1,25 @@
 {
-  "name": "skeleton__react-webpack-typescript",
+  "name": "skeleton__react-webpack-typescript__simple",
   "version": "1.0.0",
-  "description": "Skeleton of the React App with Webpack and Typescript",
+  "description": "Simple: Skeleton of the React App with Webpack and Typescript",
+  "keywords": [
+    "react",
+    "webpack",
+    "typescript",
+    "simple",
+    "skeleton"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LisKorzun/Skeleton__React-Webpack-Typescript__Simple.git"
+  },
+  "homepage": "https://github.com/LisKorzun/Skeleton__React-Webpack-Typescript__Simple",
   "scripts": {
     "build": "./node_modules/.bin/webpack",
     "start": "npm run build && node server.js"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Alesia Korzun",
+  "license": "MIT",
   "devDependencies": {
     "awesome-typescript-loader": "^5.2.1",
     "html-webpack-plugin": "^3.2.0",
