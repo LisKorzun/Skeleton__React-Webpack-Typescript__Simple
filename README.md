@@ -181,4 +181,4 @@ scripts: {
 ...
 ```
 
-### [next :arrow_right: ](https://github.com/LisKorzun/Skeleton__React-Webpack-Typescript__Medium#see-also-skeleton-series-react-webpack-typescript)
+### [next :arrow_right: ](#see-also-skeleton-series-react-webpack-typescript)
