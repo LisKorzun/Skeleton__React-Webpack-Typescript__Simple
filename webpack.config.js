@@ -1,15 +1,15 @@
 const path = require('path'),
-	webpack = require('webpack'),
+	CleanWebpackPlugin = require('clean-webpack-plugin'),
 	HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+	mode: 'none',
 	entry: {
-		app: ['./src/index.tsx', 'webpack-hot-middleware/client'],
-		vendor: ['react', 'react-dom']
+		skeleton: ['./src/index.tsx']
 	},
 	output: {
 		path: path.resolve(__dirname, 'dist'),
-		filename: 'js/[name].bundle.js'
+		filename: '[name].bundle.js'
 	},
 	devtool: 'source-map',
 	resolve: {
@@ -22,14 +22,14 @@ module.exports = {
 				loader: 'awesome-typescript-loader'
 			},
 			{
-				enforce: "pre",
+				enforce: 'pre',
 				test: /\.js$/,
-				loader: "source-map-loader"
+				loader: 'source-map-loader'
 			}
 		]
 	},
 	plugins: [
+		new CleanWebpackPlugin(['dist']),
 		new HtmlWebpackPlugin({template: path.resolve(__dirname, 'src', 'index.html')}),
-		new webpack.HotModuleReplacementPlugin()
 	]
 };

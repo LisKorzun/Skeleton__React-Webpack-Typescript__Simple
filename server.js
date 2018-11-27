@@ -1,22 +1,40 @@
-const path = require('path'),
-	express = require('express'),
-	webpack = require('webpack'),
-	webpackConfig = require('./webpack.config.js'),
-	app = express(),
-	port = process.env.PORT || 8080;
+const webpack = require('webpack'),
+	config = require('./webpack.config.js'),
+	compiler = webpack(config);
 
-app.listen(port, () => {
-	console.log(`App is listening on port ${port}`)
+const express = require('express');
+const app = express();
+const server = require('http').createServer(app);
+
+const PORT = process.env.PORT || 9000;
+
+/* If there is a need of backend,
+add custom backend-specific middleware here */
+
+const middleware = require('webpack-dev-middleware')(compiler, {
+	publicPath: config.output.publicPath,
+	index: 'index.html',
+	/* Custom options of bundle information
+	 * See more: https://webpack.js.org/configuration/stats */
+	stats: {
+		all: false,
+		modules: true,
+		assets: true,
+		maxModules: 0,
+		errors: true,
+		warnings: true,
+		moduleTrace: true,
+		errorDetails: true,
+		colors: true,
+	},
 });
 
-app.get('/', (req, res) => {
-	res.sendFile(path.resolve(__dirname, 'dist', 'index.html'));
+app.use(middleware);
+app.use('*', middleware);
+
+/* Start server */
+server.listen(PORT, 'localhost', () => {
+	const host = server.address().address;
+	const port = server.address().port;
+	console.log('\x1b[35m%s\x1b[0m', `Listening at: http://${host}:${port}`);
 });
-
-let compiler = webpack(webpackConfig);
-app.use(require('webpack-dev-middleware')(compiler, {
-	noInfo: true, publicPath: webpackConfig.output.publicPath, stats: {colors: true}
-}));
-
-app.use(require('webpack-hot-middleware')(compiler));
-app.use(express.static(path.resolve(__dirname, 'dist')));

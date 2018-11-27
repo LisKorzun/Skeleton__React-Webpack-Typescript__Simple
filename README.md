@@ -1,4 +1,15 @@
-# Skeleton: React & Webpack & Typescript
+# Skeleton: React & Webpack & Typescript (Simple steps for beginners)
+`react (16.6.x)` | `webpack (4.25.x)` | `typescript (3.1.x)`
+
+> Simplest Boilerplate/Starter: React App using Webpack and Typescript. Creation steps.
+
+### See Also: Skeleton series _"React-Webpack-Typescript"_
+
+| Сomplexity | Repo                                                                                                                  | Description                                                                                                   |
+| ---------- | --------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| Simple     | `you are here now` | Simple steps for beginners to create own configurable app from scratch                                        |
+| Medium     | [Skeleton: React & Webpack & Typescript (Medium Edition)](https://github.com/LisKorzun/Skeleton__React-Webpack-Typescript__Medium) | Configured starter/boilerplate with: `HMR`,`React Router`, `SASS`, `Radium`, `LSLint` and `Prettier` examples |
+
 
 ### :one: Structure
 ```
@@ -26,7 +37,7 @@ npm install --save-dev source-map-loader
 npm i -D webpack
 npm i -D webpack-cli
 npm i -D webpack-dev-middleware
-npm i -D webpack-hot-middleware
+npm i -D clean-webpack-plugin
 npm i -D html-webpack-plugin
 
 # Dependencies
@@ -68,17 +79,17 @@ npm i --save express
 - [x] webpack.config.js
 ```javascript
 const path = require('path'),
-	webpack = require('webpack'),
+	CleanWebpackPlugin = require('clean-webpack-plugin'),
 	HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+	mode: 'none',
 	entry: {
-		app: ['./src/index.tsx', 'webpack-hot-middleware/client'],
-		vendor: ['react', 'react-dom']
+		skeleton: ['./src/index.tsx']
 	},
 	output: {
 		path: path.resolve(__dirname, 'dist'),
-		filename: 'js/[name].bundle.js'
+		filename: '[name].bundle.js'
 	},
 	devtool: 'source-map',
 	resolve: {
@@ -91,15 +102,15 @@ module.exports = {
 				loader: 'awesome-typescript-loader'
 			},
 			{
-				enforce: "pre",
+				enforce: 'pre',
 				test: /\.js$/,
-				loader: "source-map-loader"
+				loader: 'source-map-loader'
 			}
 		]
 	},
 	plugins: [
+		new CleanWebpackPlugin(['dist']),
 		new HtmlWebpackPlugin({template: path.resolve(__dirname, 'src', 'index.html')}),
-		new webpack.HotModuleReplacementPlugin()
 	]
 };
 ```
@@ -120,24 +131,9 @@ handle routes and modify requests and responses.
 ...
 scripts: {
     ...
-    "build": "./node_modules/.bin/webpack",
-    "start": "npm run build && node server.js",
+    "build": "webpack --mode production",
+    "start": "node server.js"
     ...
 }
 ...
-```
-
-### :eight: Fix hot reload
-- [x] \src\index.tsx
-```typescript jsx
-import * as ReactDOM from 'react-dom';
-
-declare let module: any
-
-ReactDOM.render({...},
-document.getElementById('root'));
-
-if (module.hot) {
-   module.hot.accept();
-}
 ```

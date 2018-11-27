@@ -1,13 +1,15 @@
 {
   "name": "skeleton__react-webpack-typescript__simple",
   "version": "1.0.0",
-  "description": "Simple: Skeleton of the React App with Webpack and Typescript",
+  "description": "Steps for beginners: React, Typescript, Webpack",
   "keywords": [
     "react",
     "webpack",
     "typescript",
     "simple",
-    "skeleton"
+    "skeleton",
+    "beginners",
+    "steps"
   ],
   "repository": {
     "type": "git",
@@ -15,20 +17,19 @@
   },
   "homepage": "https://github.com/LisKorzun/Skeleton__React-Webpack-Typescript__Simple",
   "scripts": {
-    "build": "./node_modules/.bin/webpack",
-    "start": "npm run build && node server.js"
+    "build": "webpack --mode production",
+    "start": "node server.js"
   },
-  "author": "Alesia Korzun",
-  "license": "MIT",
+  "author": "Alesia Korzun <liskorzun@gmail.com>",
   "devDependencies": {
     "awesome-typescript-loader": "^5.2.1",
+    "clean-webpack-plugin": "^1.0.0",
     "html-webpack-plugin": "^3.2.0",
     "source-map-loader": "^0.2.4",
     "typescript": "^3.1.6",
     "webpack": "^4.25.1",
     "webpack-cli": "^3.1.2",
-    "webpack-dev-middleware": "^3.4.0",
-    "webpack-hot-middleware": "^2.24.3"
+    "webpack-dev-middleware": "^3.4.0"
   },
   "dependencies": {
     "@types/react": "^16.7.6",
